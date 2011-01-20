@@ -4,6 +4,16 @@ if ($message -eq $null)
 	Use form -message 'Message'"}	
 else
 {
+	Write-Host("")
+	$symbolicref = git symbolic-ref HEAD
+	$pbranch = $symbolicref.substring($symbolicref.LastIndexOf("/") +1)
+	echo $pbranch
+	if ($pbranch -eq "master")
+		{
+		echo "Error - cannot pull from master branch"
+		wait 100
+		exit
+		}	
 	$now = [DateTime]::Now
 	$myDay = $now.Day.ToString()
 	$myMonth = $now.Month.ToString()
